@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .top-bar {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 25px;
+    border-bottom: 1px solid #ddd; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .menuitems {
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .menu {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .menu li {
+    margin-right: 20px;
+  }
+  
+  .menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  .menu li a:hover {
+    color: #007bff;
+  }
+  
+  .auth-buttons {
+    display: flex;
+  }
+  
+  .auth-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+  
+  .signup {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .signup:hover {
+    background-color: #0056b3;
+  }
+  
+  .login {
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+  }
+  
+  .login:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .content-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
+  }
+  
+  .content-box h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .content-box form {
+    margin-top: 20px;
+  }
+  
+  .content-box input[type="text"],
+  .content-box input[type="date"],
+  .content-box button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .content-box button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .content-box button:hover {
+    background-color: #0056b3;
+  }
+  
+  .hero-section {
+    background-image: url('../Media/image.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
