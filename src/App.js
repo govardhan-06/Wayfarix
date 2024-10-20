@@ -59,7 +59,7 @@ export default function TravelPlanner() {
         <div 
           className="absolute inset-0 -z-10"
           style={{
-            backgroundImage: `url('/api/placeholder/1920/1080')`,
+            backgroundImage: `url('https://in.pinterest.com/pin/20547742045620912/')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
