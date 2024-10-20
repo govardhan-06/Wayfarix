@@ -89,3 +89,90 @@ export default function TravelPlanner() {
     </div>
   );
 }
+import React, { useEffect, useRef } from 'react';
+import { Calendar, FileQuestion, ListTodo } from 'lucide-react';
+
+export default function PlanningSteps() {
+  const stepsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    stepsRef.current.forEach((step) => {
+      if (step) observer.observe(step);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const steps = [
+    {
+      number: 1,
+      title: "Select Location and Date",
+      description: "Select your date and location of travel, and our ML based website would start filtering out activities available.",
+      icon: Calendar
+    },
+    {
+      number: 2,
+      title: "Fill the Questionnaire",
+      description: "Answer some short and simple questions to assist our model to understand you better",
+      icon: FileQuestion
+    },
+    {
+      number: 3,
+      title: "Choose activities and finalize your Itinerary",
+      description: "Choose the activities suitable for you, from our vast list. Add it to your itinerary, share it with friends or link it to your google calendar.",
+      icon: ListTodo
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-blue-900 py-16 px-4">
+      <h1 className="text-4xl font-bold text-white text-center mb-16">
+        Plan the Perfect Itinerary
+      </h1>
+
+      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+        {steps.map((step, index) => (
+          <div
+            key={step.number}
+            ref={(el) => (stepsRef.current[index] = el)}
+            className="relative bg-white rounded-lg p-6 shadow-lg opacity-0 translate-y-10 transition-all duration-700 ease-out"
+          >
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
+              <div className="bg-yellow-400 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                {step.number}
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center text-center gap-4">
+              <step.icon size={32} className="text-blue-900" />
+              <h3 className="text-xl font-semibold text-gray-800">
+                {step.title}
+              </h3>
+              <p className="text-gray-600">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <style jsx>{`
+        .animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
+    </div>
+  );
+}
