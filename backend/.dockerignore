@@ -1,0 +1,8 @@
+wayfarix/
+README.md
+LICENSE
+BACKEND.md
+.gitignore
+logs/
+.github
+__pycache__
