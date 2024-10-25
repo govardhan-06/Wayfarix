@@ -1,70 +1,171 @@
-# Wayfarix API Documentation
+# Wayfarix Backend API Documentation
 
-**Base URL**: `http://localhost:8000/`
+## Overview
 
-## **Authentication**
+This API is designed to serve as a backend for a travel planning application, providing endpoints for user preferences, activity recommendations, and itinerary management. The backend is exposed as a Docker container running on port `8000`.
 
-No Authentication
+### Base URL
 
-### **Endpoints**
+```
+http://localhost:8000
+```
 
----
+### Redirect Endpoint
 
-### **1. Get User Preferences**
+- **GET /**  
+  Redirects to the API documentation page.
+  - **Response:** 302 Redirect to `/docs`
 
-#### **GET /users/preference**
+## User Preferences Endpoint
 
-This endpoint allows users to submit their travel preferences, which will be used to generate a personalized itinerary.
+- **POST /user/preferences**  
+  Collects user preferences for travel planning.
 
-### Request Body
+### Parameters
 
-The request body must be sent as form data and should contain the following fields:
-
-| Parameter              | Type     | Description                                                              | Example                |
-| ---------------------- | -------- | ------------------------------------------------------------------------ | ---------------------- |
-| `destination`          | `string` | The destination city or location the user plans to visit.                | `Paris`                |
-| `start_date`           | `string` | The trip start date in `YYYY-MM-DD` format.                              | `2024-12-01`           |
-| `end_date`             | `string` | The trip end date in `YYYY-MM-DD` format.                                | `2024-12-07`           |
-| `season`               | `string` | The season the user plans to visit (e.g., Spring, Summer, Fall, Winter). | `Summer`               |
-| `trip_type`            | `string` | The type of trip (e.g., solo, family, couple, friends).                  | `Family`               |
-| `activity_preferences` | `string` | A comma-separated list of activity preferences (e.g., hiking, museums).  | `hiking,museums,cafes` |
-| `time_preference`      | `string` | The preferred time for activities (e.g., daytime, nighttime).            | `Daytime`              |
+| Parameter              | Type   | Description                                                             |
+| ---------------------- | ------ | ----------------------------------------------------------------------- |
+| `destination`          | string | The destination city or location (e.g., Paris).                         |
+| `start_date`           | string | Trip start date in `YYYY-MM-DD` format.                                 |
+| `end_date`             | string | Trip end date in `YYYY-MM-DD` format.                                   |
+| `season`               | string | Season they are planning to visit (e.g., Spring).                       |
+| `trip_type`            | string | Type of trip (e.g., solo, family, couple, friends).                     |
+| `activity_preferences` | string | Comma-separated string of activity preferences (e.g., hiking, museums). |
+| `time_preference`      | string | Daytime or nighttime activity preference.                               |
 
 ### Response
 
-On a successful submission, the response will be in JSON format, structured as follows:
-
-#### Success Response
-
-**Status Code**: `200 OK`
+- **Status Code:** 200 OK
+- **Content:**
 
 ```json
 {
   "message": "Preferences received",
   "data": {
     "destination": "Paris",
-    "start_date": "2024-12-01",
-    "end_date": "2024-12-07",
+    "start_date": "2024-06-01",
+    "end_date": "2024-06-10",
     "season": "Summer",
-    "trip_type": "Family",
-    "activity_preferences": ["hiking", "museums", "cafes"],
-    "time_preference": "Daytime"
+    "trip_type": "family",
+    "activity_preferences": "hiking,museums",
+    "time_preference": "daytime"
   }
 }
 ```
 
-### Error Response
+## Recommendation Endpoint
 
-In case of validation errors or missing fields, the response will return a `422 Bad Request` status with a message indicating the issue.
+- **GET /user/recommend**  
+  Recommends activities based on the user preferences collected.
 
-**Example Error Response**:
+### Response
 
-**Status Code**: `422 Bad Request`
+- **Status Code:** 200 OK
+- **Content:**
 
 ```json
 {
-  "detail": "Field 'destination' is required."
+    "message": "Recommendations received",
+    "data": [
+        {
+            "activity_id": 1,
+            "name": "Eiffel Tower Tour",
+            "description": "A tour of the iconic Eiffel Tower.",
+            "geoCode": {...},
+            "pictures": [...],
+            "bookingLink": "http://example.com/book/eiffel",
+            "minimumDuration": "2 hours"
+        },
+        ...
+    ]
 }
 ```
 
----
+## Extra Activities Endpoint
+
+- **GET /user/extra-activities**  
+  Provides additional activities that are available but not recommended by the model.
+
+### Response
+
+- **Status Code:** 200 OK
+- **Content:**
+
+```json
+{
+    "message": "Extra Activities",
+    "data": [
+        {
+            "activity_id": 2,
+            "name": "Seine River Cruise",
+            "description": "Enjoy a scenic cruise on the Seine River.",
+            "geoCode": {...},
+            "pictures": [...],
+            "bookingLink": "http://example.com/book/seine",
+            "minimumDuration": "1 hour"
+        },
+        ...
+    ]
+}
+```
+
+## Add Activity Endpoint
+
+- **POST /user/add-activity**  
+  Adds extra activities to the prepared itinerary.
+
+### Request Body
+
+```json
+{
+  "activity_ids": [1, 2, 3]
+}
+```
+
+### Response
+
+- **Status Code:** 200 OK
+- **Content:**
+
+```json
+{
+  "message": "Activities added to the itinerary",
+  "status_code": 200
+}
+```
+
+## Itinerary Retrieval Endpoint
+
+- **GET /user/get-itenary**  
+  Retrieves the prepared itinerary.
+
+### Response
+
+- **Status Code:** 200 OK
+- **Content:**
+
+```json
+{
+    "message": "Itinerary received",
+    "data": [
+        {
+            "activity_id": 1,
+            "name": "Eiffel Tower Tour",
+            "description": "A tour of the iconic Eiffel Tower.",
+            "geoCode": {...},
+            "pictures": [...],
+            "bookingLink": "http://example.com/book/eiffel",
+            "minimumDuration": "2 hours"
+        },
+        ...
+    ]
+}
+```
+
+## Running the Application
+
+To run the application, ensure you have Docker installed, and use the following command to start the server:
+
+```bash
+docker run -p 8000:8000 <govardhan06/wayfarix:latest>
+```
