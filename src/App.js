@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Calendar, FileQuestion, ListTodo } from 'lucide-react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import TravelQuestionnaire from './TravelQuestionnaire';
 
 export default function TravelPlanner() {
   const [location, setLocation] = useState('');
@@ -30,6 +32,16 @@ export default function TravelPlanner() {
     e.preventDefault();
     console.log('Creating itinerary for:', { location, departure, return_ });
   };
+  function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<TravelPlanner />} /> {/* Home Page */}
+        <Route path="/questionnaire" element={<TravelQuestionnaire />} /> {/* Questionnaire Page */}
+      </Routes>
+    </Router>
+  );
+}
 
   const steps = [
     {
@@ -180,3 +192,4 @@ export default function TravelPlanner() {
     </div>
   );
 }
+export default App;
