@@ -15,7 +15,7 @@ const TravelPlanner = () => {
       returnDate
     };
     localStorage.setItem('travelDetails', JSON.stringify(travelDetails));
-    navigate('/questionnaire');
+    navigate('/TravelQuestionnaire');
   };
 
   return (
