@@ -16,15 +16,16 @@
   }
   
   .brand {
-    font-size: 1.5rem;
+    font-size: 2em !important;
     font-weight: bold;
     color: #333;
     text-decoration: none;
   }
   
   .menuitems {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #333;
+    padding-top: 15px;
     text-decoration: none;
   }
   
