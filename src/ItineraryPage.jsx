@@ -37,28 +37,28 @@ const ItineraryPage = () => {
 
         <div className="activity-grid">
           <div className="activity-card">
-            <img src="activity1.jpg" alt="Activity 1" />
+            <img src="https://in.pinterest.com/pin/561331541072231378/" alt="Activity 1" />
             <h3>Lorem ipsum</h3>
             <button onClick={() => handleAddToItinerary('activity1')}>
               <FaPlus />
             </button>
           </div>
           <div className="activity-card">
-            <img src="activity2.jpg" alt="Activity 2" />
+            <img src="https://in.pinterest.com/pin/371828513005695552/" alt="Activity 2" />
             <h3>Lorem ipsum</h3>
             <button onClick={() => handleAddToItinerary('activity2')}>
               <FaPlus />
             </button>
           </div>
           <div className="activity-card">
-            <img src="activity3.jpg" alt="Activity 3" />
+            <img src="https://in.pinterest.com/pin/638596422192072215/" alt="Activity 3" />
             <h3>Lorem ipsum</h3>
             <button onClick={() => handleAddToItinerary('activity3')}>
               <FaPlus />
             </button>
           </div>
           <div className="activity-card">
-            <img src="activity4.jpg" alt="Activity 4" />
+            <img src="https://in.pinterest.com/pin/7810999347578856/" alt="Activity 4" />
             <h3>Lorem ipsum</h3>
             <button onClick={() => handleAddToItinerary('activity4')}>
               <FaPlus />
