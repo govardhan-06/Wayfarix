@@ -1,76 +1,65 @@
-import React, { useState } from 'react';
-import { FaPlus, FaCheck, FaCloud } from 'react-icons/fa';
+import React, { useState } from "react";
+import "./Itinerary.css"; // Add your styling here
 
-const ItineraryPage = () => {
-  const [savedItems, setSavedItems] = useState([]);
+const App = () => {
+  // State for selected activities
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(false);
 
-  const handleAddToItinerary = (item) => {
-    setSavedItems([...savedItems, item]);
+  const activities = [
+    { id: 1, name: "Activity 1", image: "https://via.placeholder.com/150" },
+    { id: 2, name: "Activity 2", image: "https://via.placeholder.com/150" },
+    { id: 3, name: "Activity 3", image: "https://via.placeholder.com/150" },
+    { id: 4, name: "Activity 4", image: "https://via.placeholder.com/150" },
+  ];
+
+  const handleAddItem = (id) => {
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+    setIsUpdated(true);
+  };
+
+  const handleSave = () => {
+    setIsUpdated(false);
+    alert("Itinerary saved!");
   };
 
   return (
-    <div>
+    <div className="app">
       <header>
-        <nav>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Check Locations</a></li>
-            <li><a href="#">Check Activities</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li>
-              <a href="#" className={savedItems.length > 0 ? 'has-update' : ''}>
-                <FaCloud /> Sign Up
-              </a>
-            </li>
-            <li><a href="#">Login</a></li>
-          </ul>
-        </nav>
+        <h1>Your Itinerary is Ready!</h1>
+        <div className="actions">
+          <button className="save-btn" onClick={handleSave}>
+            {isUpdated && <span className="blue-dot" />}
+            Save
+          </button>
+        </div>
       </header>
-
-      <main>
-        <h1>Your itinerary is Ready!</h1>
-
-        <div className="search-container">
-          <input type="text" placeholder="Search" />
-        </div>
-
-        <div className="activity-grid">
-          <div className="activity-card">
-            <img src="https://in.pinterest.com/pin/561331541072231378/" alt="Activity 1" />
-            <h3>Lorem ipsum</h3>
-            <button onClick={() => handleAddToItinerary('activity1')}>
-              <FaPlus />
+      <div className="search-bar">
+        <input type="text" placeholder="Search" />
+      </div>
+      <p>Click on the plus button to add the activity to your custom itinerary</p>
+      <div className="activities">
+        {activities.map((activity) => (
+          <div key={activity.id} className="activity-card">
+            <img src={activity.image} alt={activity.name} />
+            <p>{activity.name}</p>
+            <button
+              className="add-btn"
+              onClick={() => handleAddItem(activity.id)}
+            >
+              {selectedItems.includes(activity.id) ? "✔️" : "+"}
             </button>
           </div>
-          <div className="activity-card">
-            <img src="https://in.pinterest.com/pin/371828513005695552/" alt="Activity 2" />
-            <h3>Lorem ipsum</h3>
-            <button onClick={() => handleAddToItinerary('activity2')}>
-              <FaPlus />
-            </button>
-          </div>
-          <div className="activity-card">
-            <img src="https://in.pinterest.com/pin/638596422192072215/" alt="Activity 3" />
-            <h3>Lorem ipsum</h3>
-            <button onClick={() => handleAddToItinerary('activity3')}>
-              <FaPlus />
-            </button>
-          </div>
-          <div className="activity-card">
-            <img src="https://in.pinterest.com/pin/7810999347578856/" alt="Activity 4" />
-            <h3>Lorem ipsum</h3>
-            <button onClick={() => handleAddToItinerary('activity4')}>
-              <FaPlus />
-            </button>
-          </div>
-        </div>
-      </main>
-
-      <footer>
-        <p>&copy; 2023 Your Itinerary. All rights reserved.</p>
-      </footer>
+        ))}
+      </div>
     </div>
+  );
+};
+
+export default App;
+
   );
 };
 
