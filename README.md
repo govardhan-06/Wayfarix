@@ -3,7 +3,7 @@
 ## Overview
 **Wayfarix** is an AI-powered travel planning platform designed to offer personalized and collaborative itinerary creation for travelers. The platform simplifies travel planning by understanding user preferences and delivering customized itineraries. Users can further tailor their plans by adding activities, sharing itineraries with companions, and accessing real-time recommendations.
 
-Link to Pitch Deck: [WayFarix](www.wikipedia.com)
+Link to Pitch Deck: [WayFarix](www.wikipedia.com)   // replace with gdrive link
 
 ## Features
 
